@@ -21,7 +21,9 @@ module.exports = async (req, res) => {
     });
 
     if (!tokenRes.ok) {
-      return res.status(401).json({ error: "Token exchange failed" });
+      const errBody = await tokenRes.json().catch(() => ({}));
+      console.error("Token exchange failed:", errBody);
+      return res.status(401).json({ error: "Token exchange failed", details: errBody });
     }
 
     const tokenData = await tokenRes.json();
