@@ -1,7 +1,13 @@
 const { getRedis, getUser } = require("./_utils");
 const crypto = require("crypto");
 
-const VALID_ROLES = ["Radiant Ritualist", "Ritualist", "ritty", "ritty bitty"];
+const VALID_ROLES = ["Radiant Ritualist", "Ritualist", "ritty", "bitty"];
+
+// Discord role IDs that are allowed to nominate (comma-separated env var)
+function getNominatorRoleIds() {
+  const ids = process.env.NOMINATOR_ROLE_IDS || "";
+  return ids.split(",").map((s) => s.trim()).filter(Boolean);
+}
 
 module.exports = async (req, res) => {
   const r = getRedis();
@@ -31,6 +37,18 @@ module.exports = async (req, res) => {
     }
 
     const userData = typeof user === "string" ? JSON.parse(user) : user;
+
+    // Check if user has an eligible Discord role
+    const allowedRoleIds = getNominatorRoleIds();
+    if (allowedRoleIds.length > 0) {
+      const userRoles = userData.roles || [];
+      const hasEligibleRole = userRoles.some((r) => allowedRoleIds.includes(r));
+      if (!hasEligibleRole) {
+        return res.status(403).json({
+          error: "You need one of the eligible roles (Ascendant, bitty, ritty, Ritualist, or Radiant Ritualist) to nominate",
+        });
+      }
+    }
 
     // Check if user already nominated
     const existing = await r.get(`user_nomination:${userData.id}`);

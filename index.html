@@ -126,17 +126,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(24px) s
 
 /* ROLES */
 .roles-section{padding:20px 0 80px;}
-.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.rg{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
 .rc{border-radius:14px;padding:22px 18px;border:1px solid;transition:all .3s;}
 .rc:hover{transform:translateY(-3px);}
 .rc.radiant{background:linear-gradient(165deg,rgba(245,158,11,0.08),rgba(20,16,10,0.9));border-color:rgba(245,158,11,0.2);}
 .rc.ritualist{background:linear-gradient(165deg,rgba(52,211,153,0.06),rgba(10,20,15,0.9));border-color:rgba(52,211,153,0.18);}
 .rc.ritty{background:linear-gradient(165deg,rgba(160,155,178,0.05),rgba(18,18,25,0.9));border-color:rgba(160,155,178,0.12);}
 .rc.bitty{background:linear-gradient(165deg,rgba(34,211,238,0.06),rgba(12,16,25,0.9));border-color:rgba(34,211,238,0.18);}
+.rc.ascendant{background:linear-gradient(165deg,rgba(244,114,182,0.06),rgba(20,12,18,0.9));border-color:rgba(244,114,182,0.18);}
 .rc:hover.radiant{box-shadow:0 6px 30px rgba(245,158,11,0.1);}
 .rc:hover.ritualist{box-shadow:0 6px 30px rgba(52,211,153,0.08);}
 .rc:hover.ritty{box-shadow:0 6px 30px rgba(160,155,178,0.05);}
 .rc:hover.bitty{box-shadow:0 6px 30px rgba(34,211,238,0.08);}
+.rc:hover.ascendant{box-shadow:0 6px 30px rgba(244,114,182,0.08);}
 .rc-h{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
 .rc-i{font-size:18px;}
 .rc-n{font-size:15px;font-weight:700;}
@@ -144,11 +146,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(24px) s
 .rc.ritualist .rc-n{color:var(--green);}
 .rc.ritty .rc-n{color:var(--t2);}
 .rc.bitty .rc-n{color:var(--cyan);}
+.rc.ascendant .rc-n{color:var(--pink);}
 .rc-tg{display:inline-block;padding:3px 9px;border-radius:5px;font-size:10px;font-weight:600;margin-bottom:10px;letter-spacing:0.2px;}
 .rc.radiant .rc-tg{background:rgba(245,158,11,0.1);color:var(--gold);}
 .rc.ritualist .rc-tg{background:rgba(52,211,153,0.08);color:var(--green);}
 .rc.ritty .rc-tg{background:rgba(160,155,178,0.06);color:var(--t2);}
 .rc.bitty .rc-tg{background:rgba(34,211,238,0.08);color:var(--cyan);}
+.rc.ascendant .rc-tg{background:rgba(244,114,182,0.08);color:var(--pink);}
 .rc-d{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:12px;}
 .rc-p{list-style:none;display:flex;flex-direction:column;gap:6px;}
 .rc-p li{font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px;}
@@ -272,7 +276,7 @@ footer{border-top:1px solid var(--b1);padding:32px 24px;text-align:center;}
       <form id="nominationForm" class="fg" onsubmit="handleSubmit(event)">
         <div class="ff full"><label>Discord Username</label><input type="text" id="inpUsername" placeholder="Enter the nominee's Discord username" required></div>
         <div class="ff"><label>Discord ID (optional)</label><input type="text" id="inpDiscordId" placeholder="e.g. 123456789012345678"></div>
-        <div class="ff"><label>Nominate for Role</label><select id="inpRole" required><option value="">Select a role...</option><option value="Radiant Ritualist">Radiant Ritualist</option><option value="Ritualist">Ritualist</option><option value="ritty">ritty</option><option value="ritty bitty">ritty bitty</option></select></div>
+        <div class="ff"><label>Nominate for Role</label><select id="inpRole" required><option value="">Select a role...</option><option value="Radiant Ritualist">Radiant Ritualist</option><option value="Ritualist">Ritualist</option><option value="ritty">ritty</option><option value="bitty">bitty</option></select></div>
         <div id="formMsg" class="form-msg"></div>
         <div class="sub-row"><button type="submit" class="btn-sub" id="btnSubmit">Submit Nomination</button></div>
       </form>
@@ -288,7 +292,7 @@ footer{border-top:1px solid var(--b1);padding:32px 24px;text-align:center;}
       <div class="lb radiant"><div class="lb-hd"><span class="lb-ic">👑</span><span class="lb-rn">@Radiant Ritualist</span><span class="lb-tg">Extremely Rare</span></div><div class="lb-ls" id="lb-radiant"><div class="lb-empty">No nominees yet<span>Be the first to nominate someone for this role</span></div></div></div>
       <div class="lb ritualist"><div class="lb-hd"><span class="lb-ic">🔥</span><span class="lb-rn">@Ritualist</span><span class="lb-tg">Let the Ritual Begin</span></div><div class="lb-ls" id="lb-ritualist"><div class="lb-empty">No nominees yet<span>Be the first to nominate someone for this role</span></div></div></div>
       <div class="lb ritty"><div class="lb-hd"><span class="lb-ic">💎</span><span class="lb-rn">@ritty</span><span class="lb-tg">Loyal Member</span></div><div class="lb-ls" id="lb-ritty"><div class="lb-empty">No nominees yet<span>Be the first to nominate someone for this role</span></div></div></div>
-      <div class="lb bitty"><div class="lb-hd"><span class="lb-ic">💜</span><span class="lb-rn">@ritty bitty</span><span class="lb-tg">Baby Ritualist</span></div><div class="lb-ls" id="lb-bitty"><div class="lb-empty">No nominees yet<span>Be the first to nominate someone for this role</span></div></div></div>
+      <div class="lb bitty"><div class="lb-hd"><span class="lb-ic">💜</span><span class="lb-rn">@bitty</span><span class="lb-tg">Baby Ritualist</span></div><div class="lb-ls" id="lb-bitty"><div class="lb-empty">No nominees yet<span>Be the first to nominate someone for this role</span></div></div></div>
     </div>
   </div>
 </div>
@@ -299,7 +303,8 @@ footer{border-top:1px solid var(--b1);padding:32px 24px;text-align:center;}
   <div class="rc radiant reveal"><div class="rc-h"><span class="rc-i">👑</span><span class="rc-n">@Radiant Ritualist</span></div><div class="rc-tg">Golden Ritualist — extremely rare</div><div class="rc-d">Reserved only for true leaders who shape the direction of the community</div><ul class="rc-p"><li>⭐ Highest community honor</li><li>⭐ Leadership recognition</li><li>⭐ Elite and rare status within the Ritual</li></ul></div>
   <div class="rc ritualist reveal"><div class="rc-h"><span class="rc-i">🔥</span><span class="rc-n">@Ritualist</span></div><div class="rc-tg">Let the Ritual Begin</div><div class="rc-d">Members who embody the spirit of the community and actively contribute</div><ul class="rc-p"><li>💚 Recognized Ritualist status</li><li>💚 Deeper involvement in community activities</li></ul></div>
   <div class="rc ritty reveal"><div class="rc-h"><span class="rc-i">💎</span><span class="rc-n">@ritty</span></div><div class="rc-tg">Loyal community member</div><div class="rc-d">Long-term, loyal community member, with conviction for what we are building</div><ul class="rc-p"><li>💜 Invited to exclusive Telegram chat</li><li>💜 Trusted voice within the community</li></ul></div>
-  <div class="rc bitty reveal"><div class="rc-h"><span class="rc-i">💜</span><span class="rc-n">@ritty bitty</span></div><div class="rc-tg">You're a little ritty baby Ritualist</div><div class="rc-d">On the right path, recognized, but with a long way to go</div><ul class="rc-p"><li>💎 Access to 🔥 #ritual channel</li><li>💎 Early recognition in the community</li><li>💎 First step into the Ritual hierarchy</li></ul></div>
+  <div class="rc bitty reveal"><div class="rc-h"><span class="rc-i">💜</span><span class="rc-n">@bitty</span></div><div class="rc-tg">You're a little bitty baby Ritualist</div><div class="rc-d">On the right path, recognized, but with a long way to go</div><ul class="rc-p"><li>💎 Access to 🔥 #ritual channel</li><li>💎 Early recognition in the community</li><li>💎 First step into the Ritual hierarchy</li></ul></div>
+  <div class="rc ascendant reveal"><div class="rc-h"><span class="rc-i">🌟</span><span class="rc-n">@Ascendant</span></div><div class="rc-tg">Your first step</div><div class="rc-d">You have pledged to Ritual, this is the start of your community journey</div><ul class="rc-p"><li>🌟 Community journey begins</li><li>🌟 Eligible to nominate members</li></ul></div>
 </div></div></section>
 
 <!-- GUIDE MODAL -->
@@ -345,6 +350,7 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 /* --- State --- */
 let currentUser = null;
+let canNominate = false;
 let nominations = [];
 
 /* --- Auth --- */
@@ -354,6 +360,7 @@ async function checkAuth() {
     if (res.ok) {
       const data = await res.json();
       currentUser = data.user;
+      canNominate = data.canNominate;
     }
   } catch (e) {}
   // Show error if user is not a member of the required server
@@ -363,6 +370,7 @@ async function checkAuth() {
     window.history.replaceState({}, '', '/');
   }
   updateAuthUI();
+  updateFormEligibility();
 }
 
 function getAvatarUrl(user) {
@@ -381,6 +389,21 @@ function updateAuthUI() {
   } else {
     area.innerHTML = '<a href="/api/auth/discord" class="btn-discord" id="btnSignIn">' +
       '<svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>Sign In</a>';
+  }
+}
+
+function updateFormEligibility() {
+  const msg = document.getElementById('formMsg');
+  const btn = document.getElementById('btnSubmit');
+  if (currentUser && !canNominate) {
+    msg.className = 'form-msg error';
+    msg.textContent = 'You need an eligible role (Ascendant, bitty, ritty, Ritualist, or Radiant Ritualist) to nominate.';
+    msg.style.display = '';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+  } else {
+    btn.disabled = false;
+    btn.style.opacity = '';
   }
 }
 
@@ -430,7 +453,7 @@ function renderNominations() {
     'Radiant Ritualist': 'lb-radiant',
     'Ritualist': 'lb-ritualist',
     'ritty': 'lb-ritty',
-    'ritty bitty': 'lb-bitty'
+    'bitty': 'lb-bitty'
   };
 
   // Group by role
@@ -481,6 +504,12 @@ async function handleSubmit(e) {
   if (!currentUser) {
     msg.className = 'form-msg error';
     msg.textContent = 'Please sign in with Discord first to nominate.';
+    return;
+  }
+
+  if (!canNominate) {
+    msg.className = 'form-msg error';
+    msg.textContent = 'You need an eligible role (Ascendant, bitty, ritty, Ritualist, or Radiant Ritualist) to nominate.';
     return;
   }
 
