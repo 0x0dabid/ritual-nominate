@@ -39,6 +39,23 @@ module.exports = async (req, res) => {
 
     const user = await userRes.json();
 
+    // Check if user is a member of the required Discord server
+    const guildsRes = await fetch("https://discord.com/api/users/@me/guilds", {
+      headers: { Authorization: `Bearer ${tokenData.access_token}` },
+    });
+
+    if (!guildsRes.ok) {
+      return res.status(401).json({ error: "Failed to fetch guilds" });
+    }
+
+    const guilds = await guildsRes.json();
+    const requiredGuildId = process.env.DISCORD_GUILD_ID;
+    const isMember = guilds.some((g) => g.id === requiredGuildId);
+
+    if (!isMember) {
+      return res.redirect(302, "/?error=not_member");
+    }
+
     // Create session
     const sessionId = generateSessionId();
     const r = getRedis();

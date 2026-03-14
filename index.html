@@ -356,6 +356,12 @@ async function checkAuth() {
       currentUser = data.user;
     }
   } catch (e) {}
+  // Show error if user is not a member of the required server
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('error') === 'not_member') {
+    alert('Access denied. You must be a member of the Ritual Discord server to use this site.');
+    window.history.replaceState({}, '', '/');
+  }
   updateAuthUI();
 }
 
