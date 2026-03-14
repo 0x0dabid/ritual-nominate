@@ -1,0 +1,7 @@
+{
+  "name": "ritual-nominate",
+  "private": true,
+  "dependencies": {
+    "@upstash/redis": "^1.34.3"
+  }
+}
